@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+import Navbar from "./NavBar";
 
 export const metadata = {
   title: "League Of Legend Info",
@@ -7,12 +7,12 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="ko">
       <body>
         <header>
           <Navbar />
         </header>
-        <main>{children}</main>
+        <main className="container mx-auto mt-4">{children}</main>
       </body>
     </html>
   );
