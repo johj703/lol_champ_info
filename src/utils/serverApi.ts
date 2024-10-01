@@ -34,3 +34,15 @@ export const fetchChampionDetail = async (championId: string): Promise<any> => {
   // 챔피언 상세 정보 반환
   return data.data[championId];
 };
+
+export const fetchItemList = async (): Promise<any> => {
+  const version = await fetchVersion();
+  const response = await fetch(
+    `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/item.json`
+  );
+  if (!response.ok) {
+    throw new Error("아이템 목록을 가져오는 데 실패했습니다.");
+  }
+  const data = await response.json();
+  return data.data;
+};
