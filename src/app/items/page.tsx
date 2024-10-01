@@ -1,6 +1,6 @@
 import { fetchItemList } from "../../utils/serverApi";
 
-export default async function ItemPage() {
+const ItemPage = async () => {
   const items = await fetchItemList();
   return (
     <>
@@ -16,4 +16,6 @@ export default async function ItemPage() {
       </ul>
     </>
   );
-}
+};
+
+export default ItemPage;
