@@ -31,6 +31,12 @@ export default function ChampionRotation() {
     fetchChampionRotation();
   }, []);
 
+  // 로딩 중일 때, 표시할 UI
+  if (loading) return <p>로딩 중 입니다.</p>;
+
+  // 에러가 발생했을 때 표시할 UI
+  if (error) return <p>오류: {error}</p>;
+
   return (
     <div>
       <h1>무료 챔피언 로테이션</h1>
