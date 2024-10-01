@@ -1,7 +1,8 @@
-import { fetchItemList } from "../../utils/serverApi";
+import { fetchItemList, Item } from "../../utils/serverApi";
 
 const ItemPage = async () => {
-  const items = await fetchItemList();
+  // 서버에서 데이터 가지고 오기
+  const items: Item[] = await fetchItemList();
   return (
     <>
       <h1>아이템 목록</h1>
