@@ -45,6 +45,12 @@ export default function ChampionRotation() {
           <li key={id}>Champion ID: {id}</li>
         ))}
       </ul>
+      <h2>신규 플레이어용 로테이션</h2>
+      <ul>
+        {rotationData?.freeChampionIdsForNewPlayers.map((id) => (
+          <li key={id}>챔피언 ID: {id}</li>
+        ))}
+      </ul>
     </div>
   );
 }
