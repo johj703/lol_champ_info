@@ -1,4 +1,8 @@
-import { fetchChampionList } from "@/utils/serverApi";
+import { Champion, fetchChampionList } from "@/utils/serverApi";
+
+interface ChampionListPageProps {
+  champions: Champion[];
+}
 
 export default async function ChampionsPage() {
   const championList = await fetchChampionList();
