@@ -18,16 +18,24 @@ export interface Champion {
   };
 }
 
-export const fetchChampionList = async (): Promise<any> => {
-  const version = await fetchVersion();
-  const response = await fetch(
-    `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion.json`
+// 챔피언 목록 가져오기 함수
+export const fetchChampionList = async (): Promise<Champion[]> => {
+  const versionRes = await fetch(
+    "https://ddragon.leagueoflegends.com/api/versions.json"
   );
-  if (!response.ok) {
-    throw new Error("챔피언 목록을 가져오는 데 실패했습니다.");
-  }
-  const data = await response.json();
-  return data.data;
+  const versions = await versionRes.json();
+  const latestVersion = versions[0];
+
+  const championRes = await fetch(
+    `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion.json`
+  );
+  const championData = await championRes.json();
+
+  return Object.values(championData.data).map((champion: any) => ({
+    id: champion.id,
+    name: champion.name,
+    image: champion.image,
+  }));
 };
 
 export const fetchChampionDetail = async (championId: string): Promise<any> => {
