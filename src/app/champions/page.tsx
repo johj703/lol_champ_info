@@ -32,3 +32,16 @@ const ChampionListPage: React.FC<ChampionListPageProps> = ({ champions }) => {
 };
 
 export default ChampionListPage;
+
+// ISR을 사용해서 데이터 가지고 오기
+export async function getStaticProps() {
+  const champions = await fetchChampionList();
+
+  return {
+    props: {
+      champions,
+    },
+    // 하루에 한 번씩(86400초) 재검증하도록 revalidate를 86400초로 설정
+    revalidate: 86400,
+  };
+}
