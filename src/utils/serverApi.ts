@@ -10,6 +10,7 @@ export const fetchVersion = async (): Promise<string> => {
   return versions[0];
 };
 
+// Champion 타입 정읭
 export interface Champion {
   id: string;
   name: string;
@@ -18,7 +19,7 @@ export interface Champion {
   };
 }
 
-// 챔피언 목록 가져오기 함수
+// Champion 목록 가져오기 함수
 export const fetchChampionList = async (): Promise<Champion[]> => {
   const versionRes = await fetch(
     "https://ddragon.leagueoflegends.com/api/versions.json"
