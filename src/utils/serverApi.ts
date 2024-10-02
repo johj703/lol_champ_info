@@ -37,11 +37,14 @@ export const fetchChampionList = async (): Promise<Champion[]> => {
   );
   const championData = await championRes.json();
 
-  return Object.values(championData.data).map((champion: any) => ({
-    id: champion.id,
-    name: champion.name,
-    image: champion.image,
-  }));
+  return Object.values(championData.data).map((champion) => {
+    const champ = champion as Champion;
+    return {
+      id: champ.id,
+      name: champ.name,
+      image: champ.image,
+    };
+  });
 };
 
 export const fetchChampionDetail = async (championId: string): Promise<any> => {
