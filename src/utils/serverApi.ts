@@ -35,7 +35,7 @@ export const fetchChampionList = async (): Promise<Champion[]> => {
   const championRes = await fetch(
     `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion.json`
   );
-  const championData = await championRes.json();
+  const championData: ChampionData = await championRes.json();
 
   return Object.values(championData.data).map((champion) => {
     const champ = champion as Champion;
