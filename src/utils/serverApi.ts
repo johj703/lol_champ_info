@@ -19,6 +19,11 @@ export interface Champion {
   };
 }
 
+// champion 정보를 포함하는 객체
+interface ChampionData {
+  data: Record<string, Champion>;
+}
+
 // Champion 목록 가져오기 함수
 export const fetchChampionList = async (): Promise<Champion[]> => {
   const versionRes = await fetch(
