@@ -1,3 +1,5 @@
+import { Champion } from "../types/Champion";
+
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
     "https://ddragon.leagueoflegends.com/api/versions.json"
@@ -10,7 +12,7 @@ export const fetchVersion = async (): Promise<string> => {
   return versions[0];
 };
 
-// Champion 타입 정읭
+// Champion 타입 정의
 export interface Champion {
   id: string;
   name: string;
@@ -19,33 +21,31 @@ export interface Champion {
   };
 }
 
-// champion 정보를 포함하는 객체
-interface ChampionData {
-  data: Record<string, Champion>;
-}
-
 // Champion 목록 가져오기 함수
-export const fetchChampionList = async (): Promise<Champion[]> => {
-  const versionRes = await fetch(
+export async function fetchChampionList(): Promise<Champion[]> {
+  const versionResponse = await fetch(
     "https://ddragon.leagueoflegends.com/api/versions.json"
   );
-  const versions = await versionRes.json();
+  const versions = await versionResponse.json();
   const latestVersion = versions[0];
-
-  const championRes = await fetch(
+  const championResponse = await fetch(
     `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion.json`
   );
-  const championData: ChampionData = await championRes.json();
+  const championData = await championResponse.json();
 
-  return Object.values(championData.data).map((champion) => {
-    const champ = champion as Champion;
-    return {
-      id: champ.id,
-      name: champ.name,
-      image: champ.image,
-    };
-  });
-};
+  // 챔피언 데이터를 champion 타입으로 Mapping!
+  const champions: Champion[] = Object.values(championData.data).map(
+    (champion: any) => ({
+      id: champion.id,
+      name: champion.name,
+      image: champion.image.full,
+      title: champion.title,
+      blurb: champion.blurb,
+    })
+  );
+
+  return champions;
+}
 
 export const fetchChampionDetail = async (championId: string): Promise<any> => {
   const version = await fetchVersion();
