@@ -10,6 +10,14 @@ export const fetchVersion = async (): Promise<string> => {
   return versions[0];
 };
 
+export interface Champion {
+  id: string;
+  name: string;
+  image: {
+    full: string;
+  };
+}
+
 export const fetchChampionList = async (): Promise<any> => {
   const version = await fetchVersion();
   const response = await fetch(
