@@ -65,7 +65,14 @@ export async function fetchChampionDetail(id: string) {
       },
     });
 
+    // 챔피언 데이터 추출
     const championData = response.data.data[id];
+
+    // 방어 코드 추가: 챔피언 데이터를 찾지 못한 경우 에러 처리
+    if (!championData) {
+      throw new Error(`챔피언 정보를 찾을 수 없습니다: ${id}`);
+    }
+
     return {
       id: championData.id,
       name: championData.name,
@@ -79,6 +86,7 @@ export async function fetchChampionDetail(id: string) {
     };
   } catch (error) {
     console.log("챔피언 전보를 가져오는 중 에러가 발생했습니다.:", error);
+    throw new Error("챔피언 정보를 가져오지 못했습니다.");
   }
 }
 
