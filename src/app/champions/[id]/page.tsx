@@ -6,13 +6,23 @@ interface ChampionDetailPageProps {
   };
 }
 
-export default async function ChampionDetailPage({ params }: Props) {
-  const championDetail = await fetchChampionDetail(params.championId);
+const ChampionDetailPage = async ({ params }: ChampionDetailPageProps) => {
+  const champion: ChampionDetail = await fetchChampionDetail(params.id);
   return (
-    <>
-      <h1>{championDetail.name}</h1>
-      <p>{championDetail.title}</p>
-      <p>{championDetail.blurb}</p>
-    </>
+    <div>
+      <h1>{champion.name}</h1>
+      <h2>{champion.title}</h2>
+      <img
+        src={`https://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/${champion.image}`}
+        alt={champion.name}
+        width={400}
+        height={400}
+        className="rounded-lg mb-4"
+      />
+
+      <p>{champion.blurb}</p>
+    </div>
   );
-}
+};
+
+export default ChampionDetailPage;
