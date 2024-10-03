@@ -85,8 +85,11 @@ export async function fetchChampionDetail(id: string) {
       tags: championData.tags,
     };
   } catch (error) {
-    console.log("챔피언 정보를 가져오는 중 에러가 발생했습니다.:", error);
-    throw new Error("챔피언 정보를 가져오지 못했습니다.");
+    console.log(
+      "API 요청 중 에러:",
+      error.response ? error.response.data : error.message
+    );
+    throw new Error("API 호출 실패");
   }
 }
 
