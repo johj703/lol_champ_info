@@ -1,6 +1,6 @@
 import { fetchChampionDetail } from "@/utils/serverApi";
 
-interface Props {
+interface ChampionDetailPageProps {
   params: {
     championId: string;
   };
