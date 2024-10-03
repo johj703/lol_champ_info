@@ -1,3 +1,4 @@
+import { ChampionDetail } from "@/types/Champion";
 import { fetchChampionDetail } from "@/utils/serverApi";
 
 interface ChampionDetailPageProps {
@@ -21,6 +22,29 @@ const ChampionDetailPage = async ({ params }: ChampionDetailPageProps) => {
       />
 
       <p>{champion.blurb}</p>
+
+      {/* 추가 정보 렌더링 */}
+      <section>
+        <h3>Lore</h3>
+        <p>{champion.lore}</p>
+
+        <h3>Ally Tips</h3>
+        <ul>
+          {champion.allytips.map((tip, index) => (
+            <li key={index}>{tip}</li>
+          ))}
+        </ul>
+
+        <h3>Enemy Tips</h3>
+        <ul>
+          {champion.enemytips.map((tip, index) => (
+            <li key={index}>{tip}</li>
+          ))}
+        </ul>
+
+        <h3>Tags</h3>
+        <p>{champion.tags.join(", ")}</p>
+      </section>
     </div>
   );
 };
