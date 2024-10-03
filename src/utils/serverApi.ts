@@ -48,25 +48,39 @@ export async function fetchChampionList(): Promise<Champion[]> {
   return champions;
 }
 
-export const fetchChampionDetail = async (
-  id: string
-): Promise<ChampionDetail> => {
-  const response = await axios.get(
-    `https://ddragon.leagueoflegends.com/cdn/12.22.1/data/ko_KR/champion/${id}.json`
-  );
-  const championData = response.data.data[id];
-  return {
-    id: championData.id,
-    name: championData.name,
-    title: championData.title,
-    image: championData.image.full,
-    blurb: championData.blurb,
-    lore: championData.lore,
-    allytips: championData.allytips,
-    enemytips: championData.enemytips,
-    tags: championData.tags,
-  };
-};
+export async function fetchChampionDetail(id: string) {
+  try {
+    // 버전 정보 가져오기
+    const versionResponse = await axios.get(
+      "https://ddragon.leagueoflegends.com/api/versions.json"
+    );
+    // 최신 버전은 배열의 첫 번째 요소
+    const latestVersion = versionResponse.data[0];
+
+    // 챔피언 정보 기져오기
+    const url = `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion/${id}.json`;
+    const response = await axios.get(url, {
+      headers: {
+        "X-Riot-Token": process.env.RIOT_API_KEY,
+      },
+    });
+
+    const championData = response.data.data[id];
+    return {
+      id: championData.id,
+      name: championData.name,
+      title: championData.title,
+      image: championData.image.full,
+      blurb: championData.blurb,
+      lore: championData.lore,
+      allytips: championData.allytips,
+      enemytips: championData.enemytips,
+      tags: championData.tags,
+    };
+  } catch (error) {
+    console.log("챔피언 전보를 가져오는 중 에러가 발생했습니다.:", error);
+  }
+}
 
 // Item 타입 정의
 export interface Item {
