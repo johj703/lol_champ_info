@@ -1,4 +1,5 @@
-import { Champion } from "../types/Champion";
+import axios from "axios";
+import { Champion, ChampionDetail } from "../types/Champion";
 
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
@@ -47,17 +48,24 @@ export async function fetchChampionList(): Promise<Champion[]> {
   return champions;
 }
 
-export const fetchChampionDetail = async (championId: string): Promise<any> => {
-  const version = await fetchVersion();
-  const response = await fetch(
-    `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion/${championId}.json`
+export const fetchChampionDetail = async (
+  id: string
+): Promise<ChampionDetail> => {
+  const response = await axios.get(
+    `https://ddragon.leagueoflegends.com/cdn/12.22.1/data/ko_KR/champion/${id}.json`
   );
-  if (!response.ok) {
-    throw new Error(`${championId}의 상세 정보를 가져오는 데 실패했습니다.`);
-  }
-  const data = await response.json();
-  // 챔피언 상세 정보 반환
-  return data.data[championId];
+  const championData = response.data.data[id];
+  return {
+    id: championData.id,
+    name: championData.name,
+    title: championData.title,
+    image: championData.image.full,
+    blurb: championData.blurb,
+    lore: championData.lore,
+    allytips: championData.allytips,
+    enemytips: championData.enemytips,
+    tags: championData.tags,
+  };
 };
 
 // Item 타입 정의
