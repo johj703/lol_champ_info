@@ -2,7 +2,7 @@ import { fetchChampionList } from "@/utils/serverApi";
 import { Champion } from "@/types/Champion";
 import Image from "next/image";
 
-// ISR 렌더링 방식으로 하우레 한 번 페이지를 재검증하도록 설정
+// ISR 렌더링 방식으로 하루에 한 번 페이지를 재검증하도록 설정
 export const revalidate = 86400;
 
 const ChampionListPage = async () => {
