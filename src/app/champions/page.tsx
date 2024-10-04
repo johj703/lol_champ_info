@@ -1,6 +1,7 @@
 import { fetchChampionList } from "@/utils/serverApi";
 import { Champion } from "@/types/Champion";
 import Image from "next/image";
+import Link from "next/link";
 
 // ISR 렌더링 방식으로 하루에 한 번 페이지를 재검증하도록 설정
 export const revalidate = 86400;
@@ -13,15 +14,17 @@ const ChampionListPage = async () => {
       <h1>챔피언 목록</h1>
       <ul className="champion-list">
         {champions.map((champion) => (
-          <div key={champion.id} className="champion-card">
-            <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
-              alt={champion.name}
-              width={120}
-              height={120}
-            />
-            <p>{champion.name}</p>
-          </div>
+          <li key={champion.id}>
+            <Link href={`/champions/${champion.id}`} className="champion-card">
+              <Image
+                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
+                alt={champion.name}
+                width={120}
+                height={120}
+              />
+              <p>{champion.name}</p>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
