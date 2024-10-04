@@ -38,7 +38,7 @@ export async function fetchChampionList(): Promise<Champion[]> {
 
   // 챔피언 데이터를 champion 타입으로 Mapping!
   const champions: Champion[] = Object.values(championData.data).map(
-    (champion: any) => ({
+    (champion) => ({
       id: champion.id,
       name: champion.name,
       image: champion.image.full,
