@@ -1,5 +1,6 @@
 import { ChampionDetail } from "@/types/Champion";
 import { fetchChampionDetail } from "@/utils/serverApi";
+import Image from "next/image";
 
 interface ChampionDetailPageProps {
   params: {
@@ -13,7 +14,7 @@ const ChampionDetailPage = async ({ params }: ChampionDetailPageProps) => {
     <div>
       <h1>{champion.name}</h1>
       <h2>{champion.title}</h2>
-      <img
+      <Image
         src={`https://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/${champion.image}`}
         alt={champion.name}
         width={400}
