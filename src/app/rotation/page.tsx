@@ -10,6 +10,8 @@ interface Champion {
 
 const RotationPage = () => {
   const [champions, setChampions] = useState<Champion[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <div>
