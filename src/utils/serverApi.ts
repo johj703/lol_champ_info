@@ -3,6 +3,10 @@
 import axios from "axios";
 import { Champion, ChampionDetail } from "../types/Champion";
 
+const RIOT_API_KEY = "RGAPI-34631e2a-9e5b-49d5-a483-6e8b7bfffe81";
+const BASE_URL =
+  "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
+
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
     "https://ddragon.leagueoflegends.com/api/versions.json"
@@ -126,4 +130,21 @@ export const fetchItemList = async (): Promise<Item[]> => {
     gold: item.gold,
     description: item.description,
   }));
+};
+
+export const getChampionRotation = async () => {
+  try {
+    const response = await axios.get(BASE_URL, {
+      headers: {
+        "X-Riot-Token": RIOT_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(
+      "챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다.",
+      error
+    );
+    throw error;
+  }
 };
