@@ -18,14 +18,12 @@ const RotationPage = () => {
     const fetchData = async () => {
       try {
         const data = await getChampionRotation();
-        // API의 챔피언 리스트 형식에 맞게 수정
-        setChampions(data.freeChampionIds);
+        // API로부터 받은 데이터를 확인
+        console.log("API 응답 데이터: ", data);
+        setChampions(data);
         setLoading(false);
       } catch (error) {
-        console.log("에러 발생:", error);
-        setError(
-          `챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다. : ${error.message}`
-        );
+        console.error("챔피언 로테이션 데이터를 가져오는 중 오류 발생:", error);
         setLoading(false);
       }
     };
@@ -43,20 +41,21 @@ const RotationPage = () => {
 
   return (
     <div>
-      <h1>챔피언 로테이션</h1>
-      <ul>
-        {champions.map((champion) => (
-          <li key={champion.id}>
+      {champions.length > 0 ? (
+        champions.map((champion) => (
+          <div key={champion.id}>
             <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}.jpg`}
+              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
               alt={champion.name}
-              width={120}
-              height={120}
+              width={400}
+              height={200}
             />
-            <p>{champion.name}</p>
-          </li>
-        ))}
-      </ul>
+            <h2>{champion.name}</h2>
+          </div>
+        ))
+      ) : (
+        <p>챔피언 데이터를 불러오는 중입니다.</p>
+      )}
     </div>
   );
 };
