@@ -22,13 +22,24 @@ const RotationPage = () => {
         setChampions(data.freeChampionIds);
         setLoading(false);
       } catch (error) {
-        setError("챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다.");
+        console.log("에러 발생:", error);
+        setError(
+          `챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다. : ${error.message}`
+        );
         setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return <p>로딩 중 입니다.</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div>
