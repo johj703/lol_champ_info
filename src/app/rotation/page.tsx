@@ -1,6 +1,6 @@
 "use client";
 
-import { getChampionRotation } from "@/utils/serverApi";
+// import { getChampionRotation } from "@/utils/serverApi";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -15,20 +15,34 @@ const RotationPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchChampionRotation = async () => {
       try {
-        const data = await getChampionRotation();
-        // API로부터 받은 데이터를 확인
-        console.log("API 응답 데이터: ", data);
-        setChampions(data);
-        setLoading(false);
+        // console.log(champions);
+        setLoading(true);
+        const response = await fetch("http://localhost:3000/api/rotation");
+        if (!response.ok) {
+          const errorBody = await response.text();
+          console.error("서버 응답:", response.status, errorBody);
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const getChampions = await response.json();
+        console.log(getChampions.freeChampionIds);
+        // 응답 데이터 확인
+        console.log("API 응답: ", getChampions);
+        setChampions(getChampions.freeChampionIds);
       } catch (error) {
-        console.error("챔피언 로테이션 데이터를 가져오는 중 오류 발생:", error);
+        console.log("에러 내용:", error);
+        // 타입 가드(Type Guard) 사용
+        if (error instanceof Error) {
+          setError("데이터를 가져오는 중 오류가 발생했습니다." + error.message);
+        } else {
+          setError("알 수 없는 오류가 발생했습니다.");
+        }
+      } finally {
         setLoading(false);
       }
     };
-
-    fetchData();
+    fetchChampionRotation();
   }, []);
 
   if (loading) {
@@ -54,7 +68,7 @@ const RotationPage = () => {
           </div>
         ))
       ) : (
-        <p>챔피언 데이터를 불러오는 중입니다.</p>
+        <p>로테이션 챔피언이 없습니다.</p>
       )}
     </div>
   );
