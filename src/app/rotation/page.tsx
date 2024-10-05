@@ -48,7 +48,7 @@ const RotationPage = () => {
         {champions.map((champion) => (
           <li key={champion.id}>
             <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
+              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}.jpg`}
               alt={champion.name}
               width={120}
               height={120}
