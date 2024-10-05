@@ -34,9 +34,9 @@ export async function GET() {
 
     // 응답 데이터를 JSON으로 반환
     const data = await response.json();
-
+    console.log(data);
     // 데이터 응답
-    return NextResponse.json(data, { status: 2000 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     // 예외 발생 시 에러 처리
     return NextResponse.json(
