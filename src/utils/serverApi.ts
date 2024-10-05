@@ -145,6 +145,6 @@ export const getChampionRotation = async () => {
       "챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다.",
       error
     );
-    throw error;
+    throw new Error("API 호출에 실패했습니다.");
   }
 };
