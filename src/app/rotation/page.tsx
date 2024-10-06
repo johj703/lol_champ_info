@@ -55,6 +55,7 @@ const RotationPage = () => {
 
   return (
     <div>
+      <h1>이번 주 무료 챔피언</h1>
       {champions.length > 0 ? (
         champions.map((champion) => (
           <div key={champion.id}>
