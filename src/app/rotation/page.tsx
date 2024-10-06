@@ -19,19 +19,55 @@ const RotationPage = () => {
       try {
         // console.log(champions);
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/rotation");
-        if (!response.ok) {
-          const errorBody = await response.text();
-          console.error("서버 응답:", response.status, errorBody);
-          throw new Error(`HTTP error! status: ${response.status}`);
+
+        // 무료 로테이션 챔피언 목록 가져오기
+        const rotationResponse = await fetch(
+          "http://localhost:3000/api/rotation",
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
+        if (!rotationResponse.ok) {
+          throw new Error(`HTTP 오류! 상태: ${rotationResponse.status}`);
         }
-        const getChampions = await response.json();
-        console.log(getChampions.freeChampionIds);
-        // 응답 데이터 확인
-        console.log("API 응답: ", getChampions);
-        setChampions(getChampions.freeChampionIds);
+        const rotationData = await rotationResponse.json();
+        console.log("무료 챔피언 목록: ", rotationData.freeChampionIds);
+
+        // 전체 챔피언 데이터 가져오기
+        const championsResponse = await fetch(
+          "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations"
+        );
+        if (!championsResponse.ok) {
+          throw new Error(`HTTP 오류! 상테 코드: ${championsResponse.status}`);
+        }
+        const championsData = await championsResponse.json();
+        console.log("전체 챔피언 데이터를 가져왔습니다.");
+
+        // 무료 로테이션 챔피언 ID에 해당하는 챔피언 정보 필터링
+        const freeChampions = rotationData.freeChampionIds
+          .map((id: number) => {
+            const championKey = Object.keys(championsData.data).find(
+              (key) => championsData.data[key].key === id.toString()
+            );
+
+            // championKey가 존재하는 경우에만 데이터를 반환
+            if (championKey) {
+              return championsData.data[championKey];
+            } else {
+              console.warn(`ID ${id}에 해당하는 챔피언을 찾을 수 없습니다.`);
+              // 해당 챔피언을 찾을 수 없는 경우 null 반환
+              return null;
+            }
+          })
+          .filter((champion): champion is Champion => champion !== null);
+
+        console.log("무료 챔피언 데이터를 필터링했습니다: ", freeChampions);
+        setChampions(freeChampions);
       } catch (error) {
-        console.log("에러 내용:", error);
+        console.log("데이터를 가져오는 중 에러가 발생했습니다:", error);
         // 타입 가드(Type Guard) 사용
         if (error instanceof Error) {
           setError("데이터를 가져오는 중 오류가 발생했습니다." + error.message);
@@ -40,6 +76,7 @@ const RotationPage = () => {
         }
       } finally {
         setLoading(false);
+        console.log("데이터 가져오기 완료!");
       }
     };
     fetchChampionRotation();
@@ -60,7 +97,7 @@ const RotationPage = () => {
         champions.map((champion) => (
           <div key={champion.id}>
             <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
+              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`}
               alt={champion.name}
               width={400}
               height={200}
