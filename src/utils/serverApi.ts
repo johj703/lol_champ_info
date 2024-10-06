@@ -3,7 +3,7 @@
 import axios from "axios";
 import { Champion, ChampionDetail } from "../types/Champion";
 
-const RIOT_API_KEY = "RGAPI-205439c5-ace5-49fa-821f-88d15ec224a0";
+const RIOT_API_KEY = "RGAPI-ad3b2990-f206-4d6e-b467-5a77f1c2f5c1";
 const BASE_URL =
   "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
 
