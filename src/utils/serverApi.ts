@@ -95,8 +95,6 @@ export async function fetchChampionDetail(id: string) {
   }
 }
 
-// Item 타입 정의
-
 export const fetchItemList = async () => {
   const versionRes = await fetch(
     `https://ddragon.leagueoflegends.com/api/versions.json`
