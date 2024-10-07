@@ -41,7 +41,6 @@ export async function fetchChampionList(): Promise<Champion[]> {
 
   // championData.data에서 챔피언 정보를 가져오기
   const championType: Champion[] = Object.values(championData.data);
-  console.log(championType);
 
   // 챔피언 데이터를 champion 타입으로 Mapping!
   // const champions = championType.map((champion) => ({
