@@ -4,10 +4,6 @@ import axios from "axios";
 import { Champion } from "../types/Champion";
 import { Item } from "@/types/Item";
 
-const RIOT_API_KEY = "RGAPI-ad3b2990-f206-4d6e-b467-5a77f1c2f5c1";
-const BASE_URL =
-  "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
-
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
     "https://ddragon.leagueoflegends.com/api/versions.json"
@@ -41,17 +37,18 @@ export async function fetchChampionList(): Promise<Champion[]> {
   );
   const championData = await championResponse.json();
 
+  const championType: Champion[] = Object.values(championData.data);
+  console.log(championType);
+
   // 챔피언 데이터를 champion 타입으로 Mapping!
-  const champions: Champion[] = Object.values(championData.data).map(
-    (champion) => ({
-      id: champion.id,
-      name: champion.name,
-      image: champion.image.full,
-      title: champion.title,
-      blurb: champion.blurb,
-      key: champion.key,
-    })
-  );
+  const champions: Champion[] = championType.map((champion) => ({
+    id: champion.id,
+    name: champion.name,
+    image: champion.image,
+    title: champion.title,
+    blurb: champion.blurb,
+    key: champion.key,
+  }));
 
   return champions;
 }
@@ -93,10 +90,7 @@ export async function fetchChampionDetail(id: string) {
       tags: championData.tags,
     };
   } catch (error) {
-    console.log(
-      "API 요청 중 에러:",
-      error.response ? error.response.data : error.message
-    );
+    console.log("API 요청 중 에러:", error);
     throw new Error("API 호출 실패");
   }
 }
