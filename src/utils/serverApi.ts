@@ -1,7 +1,7 @@
 "use server";
 
 import axios from "axios";
-import { Champion, ChampionDetail } from "../types/Champion";
+import { Champion } from "../types/Champion";
 import { Item } from "@/types/Item";
 
 const RIOT_API_KEY = "RGAPI-ad3b2990-f206-4d6e-b467-5a77f1c2f5c1";
