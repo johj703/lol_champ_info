@@ -21,8 +21,12 @@ export default function ChampionRotation() {
         }
         const data: ChampionRotation = await response.json();
         setRotationData(data);
-      } catch (err: any) {
-        setError(err.message || "알 수 없는 오류가 발생했습니다.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message || "알 수 없는 오류가 발생했습니다.");
+        } else {
+          setError("알 수 없는 오류가 발생했습니다.");
+        }
       } finally {
         // 데이터를 모두 불러온 후 로딩 상태를 false로 변경
         setLoading(false);
