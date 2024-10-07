@@ -1,7 +1,7 @@
 "use server";
 
 import axios from "axios";
-import { Champion } from "../types/Champion";
+import { Champion, ChampionData } from "../types/Champion";
 import { Item } from "@/types/Item";
 
 export const fetchVersion = async (): Promise<string> => {
@@ -35,8 +35,11 @@ export async function fetchChampionList(): Promise<Champion[]> {
   const championResponse = await fetch(
     `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion.json`
   );
-  const championData = await championResponse.json();
 
+  // ChampionData 타입으로 응답 받기
+  const championData: ChampionData = await championResponse.json();
+
+  // championData.data에서 챔피언 정보를 가져오기
   const championType: Champion[] = Object.values(championData.data);
   console.log(championType);
 
@@ -48,6 +51,8 @@ export async function fetchChampionList(): Promise<Champion[]> {
     title: champion.title,
     blurb: champion.blurb,
     key: champion.key,
+    type: champion.type,
+    version: latestVersion,
   }));
 
   return champions;
