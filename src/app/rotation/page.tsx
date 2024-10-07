@@ -53,7 +53,10 @@ const RotationPage = () => {
             }
           })
 
-          .filter((champion): champion is Champion => champion !== null);
+          .filter(
+            (champion: Champion | null): champion is Champion =>
+              champion !== null
+          );
 
         console.log("무료 챔피언 데이터를 필터링했습니다: ", freeChampions);
         setChampions(freeChampions);
