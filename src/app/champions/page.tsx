@@ -11,10 +11,13 @@ const ChampionListPage = async () => {
   const champions: Champion[] = await fetchChampionList();
   return (
     <div>
-      <h1>챔피언 목록</h1>
-      <ul className="champion-list">
+      <h1 className="text-red-500 font-bold text-xl mb-5">챔피언 목록</h1>
+      <div className="grid grid-cols-4 gap-4">
         {champions.map((champion) => (
-          <li key={champion.id}>
+          <div
+            key={champion.id}
+            className="border bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center"
+          >
             <Link href={`/champions/${champion.id}`} className="champion-card">
               <Image
                 src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
@@ -22,11 +25,14 @@ const ChampionListPage = async () => {
                 width={120}
                 height={120}
               />
-              <p>{champion.name}</p>
+              <div className="items-center justify-center">
+                <p className="text-red-500">{champion.name}</p>
+                <p className="text-gray-500">{champion.title}</p>
+              </div>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
