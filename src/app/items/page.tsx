@@ -10,7 +10,7 @@ const ItemPage = async () => {
         {items.map((item) => (
           <li key={item.id}>
             <h2>{item.name}</h2>
-            <p>{item.description}</p>
+            <p>{item.plaintext}</p>
             <p>가격: {item.gold.total}골드</p>
           </li>
         ))}

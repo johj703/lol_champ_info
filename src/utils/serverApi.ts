@@ -48,6 +48,7 @@ export async function fetchChampionList(): Promise<Champion[]> {
       image: champion.image.full,
       title: champion.title,
       blurb: champion.blurb,
+      key: champion.key,
     })
   );
 
@@ -107,7 +108,7 @@ export interface Item {
     base: number;
     total: number;
   };
-  description: string;
+  plaintext: string;
 }
 
 export const fetchItemList = async (): Promise<Item[]> => {
@@ -122,13 +123,14 @@ export const fetchItemList = async (): Promise<Item[]> => {
     `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`
   );
   const itemsData = await itemsRes.json();
+  console.log(itemsData);
 
   // 데이터를 Item 타입의 배열로 변환해서 반환
   return Object.values(itemsData.data).map((item: any) => ({
     id: item.id,
     name: item.name,
     gold: item.gold,
-    description: item.description,
+    plaintext: item.plaintext,
   }));
 };
 

@@ -1,7 +1,7 @@
 export interface Item {
   id: number;
   name: string;
-  description: string;
+  plaintext: string;
   gold: {
     base: number;
     total: number;
