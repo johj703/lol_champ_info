@@ -122,19 +122,35 @@ export const fetchItemList = async () => {
   return { items: items, versions: versions[0] };
 };
 
-export const getChampionRotation = async () => {
-  try {
-    const response = await axios.get(BASE_URL, {
-      headers: {
-        "X-Riot-Token": RIOT_API_KEY,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.log(
-      "챔피언 로테이션 데이터를 가져오는 중 오류가 발생했습니다.",
-      error
-    );
-    throw new Error("API 호출에 실패했습니다.");
+export async function getChampionRotation(): Promise<Champion[]> {
+  // 무료 로테이션 챔피언 목록 가져오기
+  const rotationResponse = await fetch("http://localhost:3000/api/rotation", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!rotationResponse.ok) {
+    throw new Error(`HTTP 오류! 상태: ${rotationResponse.status}`);
   }
-};
+
+  const rotationData = await rotationResponse.json();
+  console.log("무료 챔피언 목록: ", rotationData.freeChampionIds);
+
+  // 전체 챔피언 데이터 가져오기
+  const championsData: Champion[] = await fetchChampionList();
+
+  // 무료 로테이션 챔피언 ID에 해당하는 챔피언 정보 필터링
+  const freeChampions = rotationData.freeChampionIds
+    .map((id: number): Champion | null => {
+      const championKey = championsData.find(
+        (item) => item.key === id.toString()
+      );
+
+      return championKey || null; // championKey가 없으면 null 반환
+    })
+    .filter((champion): champion is Champion => champion !== null);
+
+  return freeChampions;
+}
