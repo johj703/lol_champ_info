@@ -13,6 +13,8 @@ const ChampionDetailPage = async ({ params }: { params: Params }) => {
   const champion: ChampionDetail = {
     ...championData,
     key: params.id,
+    type: championData.type,
+    version: championData.version,
   };
 
   return (
