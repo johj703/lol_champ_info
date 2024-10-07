@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { Champion, ChampionDetail } from "../types/Champion";
+import { Item } from "@/types/Item";
 
 const RIOT_API_KEY = "RGAPI-ad3b2990-f206-4d6e-b467-5a77f1c2f5c1";
 const BASE_URL =
@@ -101,17 +102,8 @@ export async function fetchChampionDetail(id: string) {
 }
 
 // Item 타입 정의
-export interface Item {
-  id: string;
-  name: string;
-  gold: {
-    base: number;
-    total: number;
-  };
-  plaintext: string;
-}
 
-export const fetchItemList = async (): Promise<Item[]> => {
+export const fetchItemList = async () => {
   const versionRes = await fetch(
     `https://ddragon.leagueoflegends.com/api/versions.json`
   );
@@ -123,15 +115,11 @@ export const fetchItemList = async (): Promise<Item[]> => {
     `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`
   );
   const itemsData = await itemsRes.json();
-  console.log(itemsData);
+  // console.log(itemsData);
+  const items: Item[] = Object.values(itemsData.data);
 
   // 데이터를 Item 타입의 배열로 변환해서 반환
-  return Object.values(itemsData.data).map((item: any) => ({
-    id: item.id,
-    name: item.name,
-    gold: item.gold,
-    plaintext: item.plaintext,
-  }));
+  return { items: items, versions: versions[0] };
 };
 
 export const getChampionRotation = async () => {
