@@ -38,14 +38,21 @@ const RotationPage = () => {
 
         // 무료 로테이션 챔피언 ID에 해당하는 챔피언 정보 필터링
         const freeChampions = rotationData.freeChampionIds
-          .map((id: number) => {
+          .map((id: number): Champion | null => {
             const championKey = championsData.find(
               (item) => item.key === id.toString()
             );
 
             // championKey가 존재하는 경우에만 데이터를 반환
-            return championKey || null; // championKey가 없으면 null 반환
+            if (championKey) {
+              return championKey;
+            } else {
+              console.warn(`ID ${id}에 해당하는 챔피언을 찾을 수 없습니다.`);
+              // 해당 챔피언을 찾을 수 없는 경우 null 반환
+              return null;
+            }
           })
+
           .filter((champion): champion is Champion => champion !== null);
 
         console.log("무료 챔피언 데이터를 필터링했습니다: ", freeChampions);
