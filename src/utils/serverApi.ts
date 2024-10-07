@@ -17,13 +17,13 @@ export const fetchVersion = async (): Promise<string> => {
 };
 
 // Champion 타입 정의
-export interface Champion {
-  id: string;
-  name: string;
-  image: {
-    full: string;
-  };
-}
+// export interface Champion {
+//   id: string;
+//   name: string;
+//   image: {
+//     full: string;
+//   };
+// }
 
 // Champion 목록 가져오기 함수
 export async function fetchChampionList(): Promise<Champion[]> {
