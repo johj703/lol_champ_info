@@ -4,12 +4,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { fetchChampionList } from "@/utils/serverApi";
-
-interface Champion {
-  id: number;
-  name: string;
-  key: string;
-}
+import { Champion } from "@/types/Champion";
 
 const RotationPage = () => {
   const [champions, setChampions] = useState<Champion[]>([]);
