@@ -1,4 +1,4 @@
-import { ChampionDetail } from "@/types/Champion";
+import { Champion, ChampionDetail } from "@/types/Champion";
 import { fetchChampionDetail } from "@/utils/serverApi";
 import Image from "next/image";
 
@@ -7,7 +7,7 @@ interface Params {
 }
 
 const ChampionDetailPage = async ({ params }: { params: Params }) => {
-  const championData = await fetchChampionDetail(params.id);
+  const championData: Champion = await fetchChampionDetail(params.id);
 
   // championData에 key를 추가
   const champion: ChampionDetail = {
