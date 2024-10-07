@@ -7,6 +7,10 @@ export interface Champion {
   key: string;
   type: string;
   version: string;
+  lore: string;
+  allytips: string[];
+  enemytips: string[];
+  tags: string[];
 }
 
 export interface ChampionData {
