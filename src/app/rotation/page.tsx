@@ -94,8 +94,8 @@ const RotationPage = () => {
             <Image
               src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`}
               alt={champion.name}
-              width={400}
-              height={200}
+              width={200}
+              height={100}
             />
             <h2>{champion.name}</h2>
           </div>
