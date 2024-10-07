@@ -10,7 +10,7 @@ const ItemPage = async () => {
   const items: Item[] = result.items;
   console.log("items", items);
   return (
-    <>
+    <div>
       <h1>아이템 목록</h1>
       <ul>
         {items.map((item) => (
@@ -28,7 +28,7 @@ const ItemPage = async () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
