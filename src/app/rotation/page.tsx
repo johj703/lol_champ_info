@@ -77,7 +77,7 @@ const RotationPage = () => {
   }, []);
 
   if (loading) {
-    return <p>로딩 중 입니다.</p>;
+    return <p className="text-white">로딩 중 입니다.</p>;
   }
 
   if (error) {
