@@ -7,6 +7,7 @@ export interface Champion {
 }
 
 export interface ChampionDetail extends Champion {
+  key: string;
   title: string;
   blurb: string;
   lore: string;
