@@ -86,20 +86,28 @@ const RotationPage = () => {
   }
 
   return (
-    <div>
-      <h1>이번 주 무료 챔피언</h1>
+    <div className="bg-gray-900 text-white min-h-screen p-6">
+      <h1 className="text-3xl font-bold text-red-500 mb-4">
+        이번 주 무료 챔피언
+      </h1>
       {champions.length > 0 ? (
-        champions.map((champion) => (
-          <div key={champion.id}>
-            <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`}
-              alt={champion.name}
-              width={200}
-              height={100}
-            />
-            <h2>{champion.name}</h2>
-          </div>
-        ))
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {champions.map((champion) => (
+            <div
+              key={champion.id}
+              className="bg-gray-800 p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+              <Image
+                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`}
+                alt={champion.name}
+                width={200}
+                height={100}
+                className="mb-2 rounded-md"
+              />
+              <h2 className="text-lg font-bold text-center">{champion.name}</h2>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>로테이션 챔피언이 없습니다.</p>
       )}
