@@ -81,7 +81,7 @@ const RotationPage = () => {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className="text-white">{error}</p>;
   }
 
   return (
