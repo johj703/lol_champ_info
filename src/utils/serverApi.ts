@@ -1,7 +1,7 @@
 "use server";
 
 import axios from "axios";
-// import { Champion, ChampionDetail } from "../types/Champion";
+import { Champion, ChampionDetail } from "../types/Champion";
 import { Item } from "@/types/Item";
 
 const RIOT_API_KEY = "RGAPI-ad3b2990-f206-4d6e-b467-5a77f1c2f5c1";
@@ -20,14 +20,14 @@ export const fetchVersion = async (): Promise<string> => {
   return versions[0];
 };
 
-// Champion 타입 정의
-export interface Champion {
-  id: string;
-  name: string;
-  image: {
-    full: string;
-  };
-}
+// // Champion 타입 정의
+// export interface Champion {
+//   id: string;
+//   name: string;
+//   image: {
+//     full: string;
+//   };
+// }
 
 // Champion 목록 가져오기 함수
 export async function fetchChampionList(): Promise<Champion[]> {
