@@ -3,6 +3,7 @@
 import axios from "axios";
 import { Champion, ChampionData } from "../types/Champion";
 import { Item } from "@/types/Item";
+import { Champion } from "@/types/Champion";
 
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
@@ -76,7 +77,7 @@ export async function fetchChampionDetail(id: string) {
     });
 
     // 챔피언 데이터 추출
-    const championData = response.data.data[id];
+    const championData: Champion = response.data.data[id];
 
     // 방어 코드 추가: 챔피언 데이터를 찾지 못한 경우 에러 처리
     if (!championData) {
