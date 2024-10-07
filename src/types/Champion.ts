@@ -3,6 +3,7 @@ export interface Champion {
   name: string;
   title: string;
   image: string;
+  blurb: string;
   key: string;
 }
 
