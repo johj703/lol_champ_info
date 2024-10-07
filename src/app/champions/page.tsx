@@ -1,5 +1,5 @@
 import { fetchChampionList } from "@/utils/serverApi";
-import { Champion } from "@/types/Champion";
+// import { Champion } from "@/types/Champion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 const ChampionListPage = async () => {
   // 챔피언 목록 데이터를 가지고 오기
-  const champions: Champion[] = await fetchChampionList();
+  const champions = await fetchChampionList();
   return (
     <div>
       <h1 className="text-red-500 font-bold text-xl mb-5">챔피언 목록</h1>

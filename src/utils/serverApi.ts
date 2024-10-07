@@ -3,7 +3,6 @@
 import axios from "axios";
 import { Champion, ChampionData } from "../types/Champion";
 import { Item } from "@/types/Item";
-import { Champion } from "@/types/Champion";
 
 export const fetchVersion = async (): Promise<string> => {
   const response = await fetch(
@@ -45,18 +44,18 @@ export async function fetchChampionList(): Promise<Champion[]> {
   console.log(championType);
 
   // 챔피언 데이터를 champion 타입으로 Mapping!
-  const champions: Champion[] = championType.map((champion) => ({
-    id: champion.id,
-    name: champion.name,
-    image: champion.image,
-    title: champion.title,
-    blurb: champion.blurb,
-    key: champion.key,
-    type: champion.type,
-    version: latestVersion,
-  }));
+  // const champions = championType.map((champion) => ({
+  //   id: champion.id,
+  //   name: champion.name,
+  //   image: champion.image,
+  //   title: champion.title,
+  //   blurb: champion.blurb,
+  //   key: champion.key,
+  //   type: champion.type,
+  //   version: latestVersion,
+  // }));
 
-  return champions;
+  return championType;
 }
 
 export async function fetchChampionDetail(id: string) {
@@ -94,6 +93,8 @@ export async function fetchChampionDetail(id: string) {
       allytips: championData.allytips,
       enemytips: championData.enemytips,
       tags: championData.tags,
+      type: championData.type,
+      versiopn: championData.version,
     };
   } catch (error) {
     console.log("API 요청 중 에러:", error);
