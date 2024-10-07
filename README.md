@@ -20,19 +20,19 @@ NEXT_PUBLIC_API_URL=http://localhost:3000
 
 ## 기능
 
-![alt text](image.png)
+![alt text](./src/assets/image.png)
 
 - **챔피언 목록 페이지**: 모든 챔피언을 나열한 목록을 확인할 수 있으며, 각 챔피언을 클릭하면 해당 챔피언의 상세 페이지로 이동할 수 있습니다.
 
-![alt text](image-1.png)
+![alt text](./src/assets/image-1.png)
 
 - **챔피언 상세 정보 보기**: 각 챔피언을 클릭하면 해당 챔피언의 능력치, 역할, 스킬 설명 등의 상세 정보를 확인할 수 있습니다.
 
-![alt text](image-2.png)
+![alt text](./src/assets/image-2.png)
 
 - **게임 아이템 목록 조회**: 최신 게임 아이템 목록을 가져와 사용 가능한 아이템들을 조회할 수 있습니다.
 
-![alt text](image-3.png)
+![alt text](./src/assets/image-3.png)
 
 - **무료 챔피언 로테이션 목록 표시**: Riot Games API에서 현재 무료로 플레이 가능한 챔피언 목록을 불러와 화면에 표시합니다.
 
