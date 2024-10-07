@@ -2,6 +2,7 @@ export interface Champion {
   id: string;
   name: string;
   image: string;
+  key: string;
 }
 
 export interface ChampionDetail extends Champion {
