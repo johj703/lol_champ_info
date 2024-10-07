@@ -2,7 +2,7 @@ export interface Champion {
   id: string;
   name: string;
   title: string;
-  image: string;
+  image: ChampionImage;
   blurb: string;
   key: string;
 }
@@ -15,4 +15,8 @@ export interface ChampionDetail extends Champion {
   allytips: string[];
   enemytips: string[];
   tags: string[];
+}
+
+interface ChampionImage {
+  full: string;
 }
