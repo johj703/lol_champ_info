@@ -1,4 +1,5 @@
-import { ChampionRotation } from "../types/ChampionRotation.ts";
+// import { ChampionRotation } from "../types/ChampionRotation.ts";
+import type { ChampionRotation } from "@/types/ChampionRotation";
 import { useEffect, useState } from "react";
 
 export default function ChampionRotation() {
