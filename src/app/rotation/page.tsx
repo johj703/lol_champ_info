@@ -18,15 +18,12 @@ const RotationPage = () => {
         setLoading(true);
 
         // 무료 로테이션 챔피언 목록 가져오기
-        const rotationResponse = await fetch(
-          "http://localhost:3000/api/rotation",
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        );
+        const rotationResponse = await fetch("/api/rotation", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        });
         if (!rotationResponse.ok) {
           throw new Error(`HTTP 오류! 상태: ${rotationResponse.status}`);
         }
