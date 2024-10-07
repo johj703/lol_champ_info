@@ -2,14 +2,19 @@ import { ChampionDetail } from "@/types/Champion";
 import { fetchChampionDetail } from "@/utils/serverApi";
 import Image from "next/image";
 
-interface ChampionDetailPageProps {
-  params: {
-    championId: string;
-  };
+interface Params {
+  id: string;
 }
 
-const ChampionDetailPage = async ({ params }: ChampionDetailPageProps) => {
-  const champion: ChampionDetail = await fetchChampionDetail(params.id);
+const ChampionDetailPage = async ({ params }: { params: Params }) => {
+  const championData = await fetchChampionDetail(params.id);
+
+  // championData에 key를 추가
+  const champion: ChampionDetail = {
+    ...championData,
+    key: params.id,
+  };
+
   return (
     <div className="bg-gray-900 text-gray-200 p-4 rounded-lg shadow-lg">
       <h1 className="text-red-500 text-2xl font-bold">{champion.name}</h1>
