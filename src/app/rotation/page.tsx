@@ -3,10 +3,12 @@
 // import { getChampionRotation } from "@/utils/serverApi";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { fetchChampionList } from "@/utils/serverApi";
 
 interface Champion {
   id: number;
   name: string;
+  key: string;
 }
 
 const RotationPage = () => {
@@ -37,25 +39,18 @@ const RotationPage = () => {
         console.log("무료 챔피언 목록: ", rotationData.freeChampionIds);
 
         // 전체 챔피언 데이터 가져오기
-        const championsResponse = await fetch(
-          "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations"
-        );
-        if (!championsResponse.ok) {
-          throw new Error(`HTTP 오류! 상테 코드: ${championsResponse.status}`);
-        }
-        const championsData = await championsResponse.json();
-        console.log("전체 챔피언 데이터를 가져왔습니다.");
+        const championsData: Champion[] = await fetchChampionList();
 
         // 무료 로테이션 챔피언 ID에 해당하는 챔피언 정보 필터링
         const freeChampions = rotationData.freeChampionIds
           .map((id: number) => {
-            const championKey = Object.keys(championsData.data).find(
-              (key) => championsData.data[key].key === id.toString()
+            const championKey = championsData.find(
+              (item) => item.key === id.toString()
             );
 
             // championKey가 존재하는 경우에만 데이터를 반환
             if (championKey) {
-              return championsData.data[championKey];
+              return championKey;
             } else {
               console.warn(`ID ${id}에 해당하는 챔피언을 찾을 수 없습니다.`);
               // 해당 챔피언을 찾을 수 없는 경우 null 반환
