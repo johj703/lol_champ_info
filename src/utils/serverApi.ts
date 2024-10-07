@@ -142,7 +142,9 @@ export async function getChampionRotation(): Promise<Champion[]> {
 
       return championKey || null; // championKey가 없으면 null 반환
     })
-    .filter((champion): champion is Champion => champion !== null);
+    .filter(
+      (champion: Champion | null): champion is Champion => champion !== null
+    );
 
   return freeChampions;
 }
