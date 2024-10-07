@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# League of Legends Champion Rotation
 
-## Getting Started
+## 프로젝트 설명
 
-First, run the development server:
+이 프로젝트는 **League of Legends**의 무료 챔피언 로테이션 정보를 가져와서 표시하는 웹 애플리케이션입니다. 사용자는 현재 무료로 플레이할 수 있는 챔피언 목록을 확인하고 각 챔피언의 상세 정보를 볼 수 있습니다. 또한 게임 내 아이템 목록도 확인할 수 있습니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 기술 스택
+
+- **프론트엔드**: React, TypeScript, Tailwind CSS
+- **백엔드**: Node.js, Express
+- **API**: Riot Games API
+
+## 환경 변수
+
+프로젝트에서 사용하는 환경 변수는 `.env.local` 파일에 다음과 같이 설정해야 합니다.
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![alt text](image.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **챔피언 목록 페이지**: 모든 챔피언을 나열한 목록을 확인할 수 있으며, 각 챔피언을 클릭하면 해당 챔피언의 상세 페이지로 이동할 수 있습니다.
 
-## Learn More
+![alt text](image-1.png)
 
-To learn more about Next.js, take a look at the following resources:
+- **챔피언 상세 정보 보기**: 각 챔피언을 클릭하면 해당 챔피언의 능력치, 역할, 스킬 설명 등의 상세 정보를 확인할 수 있습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![alt text](image-2.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **게임 아이템 목록 조회**: 최신 게임 아이템 목록을 가져와 사용 가능한 아이템들을 조회할 수 있습니다.
 
-## Deploy on Vercel
+![alt text](image-3.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **무료 챔피언 로테이션 목록 표시**: Riot Games API에서 현재 무료로 플레이 가능한 챔피언 목록을 불러와 화면에 표시합니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 라이센스
+
+이 프로젝트는 MIT 라이센스를 따릅니다.
