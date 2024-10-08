@@ -56,7 +56,7 @@ https://lol-champ-info-vzxq-dzp69w6b6-johj703s-projects.vercel.app/
 프로젝트에서 사용하는 환경 변수는 `.env.local` 파일에 다음과 같이 설정해야 합니다.
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:3000lol-champ-info-5wwj.vercel.applol-champ-info-5wwj.vercel.app
 ```
 
 ## 기능
