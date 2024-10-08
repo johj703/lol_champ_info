@@ -49,7 +49,6 @@ https://lol-champ-info-vzxq-dzp69w6b6-johj703s-projects.vercel.app/
 ## 기술 스택
 
 - **프론트엔드**: React, TypeScript, Tailwind CSS
-- **백엔드**: Node.js, Express
 - **API**: Riot Games API
 
 ## 환경 변수
